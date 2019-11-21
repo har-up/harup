@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:dist="http://schemas.android.com/apk/distribution"
-          package="com.eastcom.harup">
+        xmlns:dist="http://schemas.android.com/apk/distribution"
+        package="com.eastcom.harup">
 
-    <dist:module dist:instant="true"/>
+    <dist:module dist:instant="true" />
 
     <application
             android:allowBackup="true"
@@ -12,13 +12,28 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".view.activity.ShapeDrawableActivity"></activity>
+        <activity android:name=".view.activity.RemoteViewActivity" />
+        <activity android:name=".view.activity.HorizontalScrollViewActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".view.broadcast.MyBroadCastReceiver" />
+        <receiver android:name=".view.broadcast.MyAppWidget">
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/appwidget_info"></meta-data>
+
+            <intent-filter>
+                <action android:name="com.eastcom.harup.broadcast.appwidget.CLICK" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

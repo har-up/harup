@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import com.eastcom.harup.adapter.HomeRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,12 +17,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun init(){
-        var textview: TextView
-        for (i in 0..100){
-            textview = TextView(this)
-            textview.text = "this is $i"
-            textview.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
-            horizontalScrollView.addView(textview)
-        }
+        var data = arrayOf("HorizontalScrollView","RemoteView","ShapeDrawable","next").toList()
+        recyclerView.layoutManager = GridLayoutManager(this,2)
+        recyclerView.adapter = HomeRecyclerViewAdapter(data)
     }
 }

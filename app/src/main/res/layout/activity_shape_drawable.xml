@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        tools:context=".view.activity.ShapeDrawableActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rectangle"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:text="shape rectangle"
+            android:background="@drawable/shape_rectangle"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/circle"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="20dp"
+            android:text="shape oval"
+            android:background="@drawable/shape_oval"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/line"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="20dp"
+            android:text="shape line"
+            android:background="@drawable/shape_line"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ring"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="20dp"
+            android:text="shape ring"
+            android:background="@drawable/shape_ring"/>
+
+</LinearLayout>

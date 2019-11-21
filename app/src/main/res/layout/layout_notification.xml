@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/remoteView"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/notification_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <TextView
+            android:id="@+id/notification_text_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="TextView" />
+
+    <TextView
+            android:id="@+id/notification_text_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/notification_text_one"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="62dp"
+            android:layout_marginRight="-1dp"
+            android:text="TextView" />
+
+</RelativeLayout>
