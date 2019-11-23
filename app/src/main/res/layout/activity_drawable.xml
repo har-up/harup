@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        tools:context=".view.activity.DrawableActivity"
+        android:orientation="vertical">
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Layer Drawable"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/layer_list"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="State Drawable(touch me)"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/state_list"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/levelButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="LevelList Drawable(click me)"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/level_list"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/transitionButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="Transition Drawable(click me)"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/transition_drawable"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/insertButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="Insert Drawable(smaller)"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/insert_drawable"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/scaleButton"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:text="Scale Drawable(scale 70%)"
+            android:background="@drawable/scale_drawable"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/clip"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:foregroundGravity="center"
+            android:background="@drawable/clip_drawable"/>
+</LinearLayout>

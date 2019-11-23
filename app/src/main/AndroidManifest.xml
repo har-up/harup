@@ -12,7 +12,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.ShapeDrawableActivity"></activity>
+        <activity android:name=".view.activity.DrawableActivity"></activity>
+        <activity android:name=".view.activity.ShapeDrawableActivity" />
         <activity android:name=".view.activity.RemoteViewActivity" />
         <activity android:name=".view.activity.HorizontalScrollViewActivity" />
         <activity android:name=".MainActivity">
@@ -27,7 +28,7 @@
         <receiver android:name=".view.broadcast.MyAppWidget">
             <meta-data
                     android:name="android.appwidget.provider"
-                    android:resource="@xml/appwidget_info"></meta-data>
+                    android:resource="@xml/appwidget_info" />
 
             <intent-filter>
                 <action android:name="com.eastcom.harup.broadcast.appwidget.CLICK" />

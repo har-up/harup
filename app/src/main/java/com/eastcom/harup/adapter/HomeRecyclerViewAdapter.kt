@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.eastcom.harup.R
+import com.eastcom.harup.view.activity.DrawableActivity
 import com.eastcom.harup.view.activity.HorizontalScrollViewActivity
 import com.eastcom.harup.view.activity.RemoteViewActivity
 import com.eastcom.harup.view.activity.ShapeDrawableActivity
@@ -32,6 +33,7 @@ class HomeRecyclerViewAdapter(var datas: List<String>) : RecyclerView.Adapter<Ho
                 "HorizontalScrollView" -> intent = Intent(holder.itemView.context,HorizontalScrollViewActivity::class.java)
                 "RemoteView" -> intent = Intent(holder.itemView.context,RemoteViewActivity::class.java)
                 "ShapeDrawable" -> intent = Intent(holder.itemView.context,ShapeDrawableActivity::class.java)
+                "OtherDrawable" -> intent = Intent(holder.itemView.context,DrawableActivity::class.java)
             }
             if(intent != null) holder.itemView.context.startActivity(intent)
         }
