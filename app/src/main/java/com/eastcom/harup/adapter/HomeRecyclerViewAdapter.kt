@@ -8,10 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.eastcom.harup.R
-import com.eastcom.harup.view.activity.DrawableActivity
-import com.eastcom.harup.view.activity.HorizontalScrollViewActivity
-import com.eastcom.harup.view.activity.RemoteViewActivity
-import com.eastcom.harup.view.activity.ShapeDrawableActivity
+import com.eastcom.harup.view.activity.*
 
 class HomeRecyclerViewAdapter(var datas: List<String>) : RecyclerView.Adapter<HomeItemViewHolder>() {
 
@@ -28,12 +25,16 @@ class HomeRecyclerViewAdapter(var datas: List<String>) : RecyclerView.Adapter<Ho
         holder.infoText.text = datas[position]
         holder.cardView.setOnClickListener {
             var intent : Intent? = null
-
             when(datas[position]){
                 "HorizontalScrollView" -> intent = Intent(holder.itemView.context,HorizontalScrollViewActivity::class.java)
                 "RemoteView" -> intent = Intent(holder.itemView.context,RemoteViewActivity::class.java)
                 "ShapeDrawable" -> intent = Intent(holder.itemView.context,ShapeDrawableActivity::class.java)
                 "OtherDrawable" -> intent = Intent(holder.itemView.context,DrawableActivity::class.java)
+                "Animation" -> intent = Intent(holder.itemView.context,AnimationActivity::class.java)
+                "Animation Activity" -> {
+                    intent = Intent(holder.itemView.context,EnterAndExitAnimActivity::class.java)
+                }
+                "Animator" -> intent = Intent(holder.itemView.context,AnimatorActivity::class.java)
             }
             if(intent != null) holder.itemView.context.startActivity(intent)
         }

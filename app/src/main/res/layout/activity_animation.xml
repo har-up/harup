@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.activity.AnimationActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/animation"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/state_list" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp">
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/translate"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text = "TRANSLATE"
+                android:textSize="13sp"/>
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/scale"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text = "SCALE"/>
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/rotate"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text = "ROTATE"/>
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/alpha"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text = "ALPHA"/>
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="rotate 与 translate整合会与期待的效果不同，猜测是由于移动过程中pivot值也变化了"/>
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/animationSet"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="ANIMATION SET"/>
+</LinearLayout>

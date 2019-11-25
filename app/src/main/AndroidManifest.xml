@@ -12,7 +12,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.DrawableActivity"></activity>
+        <activity android:name=".view.activity.AnimatorActivity"></activity>
+        <activity android:name=".view.activity.EnterAndExitAnimActivity" />
+        <activity android:name=".view.activity.AnimationActivity" />
+        <activity android:name=".view.activity.DrawableActivity" />
         <activity android:name=".view.activity.ShapeDrawableActivity" />
         <activity android:name=".view.activity.RemoteViewActivity" />
         <activity android:name=".view.activity.HorizontalScrollViewActivity" />
