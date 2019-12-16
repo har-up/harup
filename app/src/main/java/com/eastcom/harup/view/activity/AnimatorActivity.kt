@@ -1,13 +1,14 @@
 package com.eastcom.harup.view.activity
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ArgbEvaluator
-import android.animation.ObjectAnimator
+import android.animation.*
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Interpolator
+import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.eastcom.harup.R
 import kotlinx.android.synthetic.main.activity_animation.*
 import kotlinx.android.synthetic.main.activity_animator.*
@@ -32,6 +33,10 @@ class AnimatorActivity : AppCompatActivity() {
         set.setOnClickListener {
             endColorAnimator()
             startAnimatorSet(animator)
+        }
+
+        loadAnimator.setOnClickListener {
+            loadAnimator(ViewWrapper(animator))
         }
     }
 
@@ -64,6 +69,12 @@ class AnimatorActivity : AppCompatActivity() {
         animatorSet?.start()
     }
 
+    private fun loadAnimator(target: Any){
+        val loadAnimator = AnimatorInflater.loadAnimator(this, R.animator.animator_property)
+        loadAnimator.setTarget(target)
+        loadAnimator.start()
+    }
+
     private fun endColorAnimator(){
             colorAnimator?.end()
     }
@@ -75,6 +86,26 @@ class AnimatorActivity : AppCompatActivity() {
     override fun finish() {
         endColorAnimator()
         endAimatorSet()
+        AccelerateDecelerateInterpolator()
         super.finish()
     }
 }
+
+class ViewWrapper{
+    var view:View
+
+    constructor (view : View){
+        this.view = view
+    }
+
+    fun setX(x:Int){
+        this.view.x = x.toFloat()
+    }
+
+    fun getX():Float{
+        return this.view.x
+    }
+
+}
+
+

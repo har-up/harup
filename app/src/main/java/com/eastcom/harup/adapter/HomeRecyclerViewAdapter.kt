@@ -35,6 +35,9 @@ class HomeRecyclerViewAdapter(var datas: List<String>) : RecyclerView.Adapter<Ho
                     intent = Intent(holder.itemView.context,EnterAndExitAnimActivity::class.java)
                 }
                 "Animator" -> intent = Intent(holder.itemView.context,AnimatorActivity::class.java)
+                "Window" -> intent = Intent(holder.itemView.context,WindowActivity::class.java)
+                "ImageLoader" -> intent = Intent(holder.itemView.context,ImageLoaderActivity::class.java)
+                "IPC" -> intent = Intent(holder.itemView.context,IPCActivity::class.java)
             }
             if(intent != null) holder.itemView.context.startActivity(intent)
         }

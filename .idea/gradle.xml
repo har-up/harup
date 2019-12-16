@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/lib_api" />
+            <option value="$PROJECT_DIR$/lib_imageloader" />
             <option value="$PROJECT_DIR$/lib_view" />
             <option value="$PROJECT_DIR$/module_login" />
           </set>

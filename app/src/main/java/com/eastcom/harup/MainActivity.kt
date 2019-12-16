@@ -17,7 +17,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        var data = arrayOf("HorizontalScrollView","RemoteView","ShapeDrawable","OtherDrawable","Animation","Animation Activity","Animator").toList()
+        var data = arrayOf("HorizontalScrollView","RemoteView","ShapeDrawable","OtherDrawable"
+            ,"Animation","Animation Activity","Animator","Window","ImageLoader",
+            "IPC").toList()
         recyclerView.layoutManager = GridLayoutManager(this,2)
         recyclerView.adapter = HomeRecyclerViewAdapter(data)
     }
