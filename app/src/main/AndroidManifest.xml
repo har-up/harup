@@ -7,6 +7,7 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
             android:allowBackup="true"
@@ -15,7 +16,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.IPCActivity"></activity>
+        <activity android:name=".view.activity.SocketActivity"></activity>
+        <activity android:name=".view.activity.ContentProviderActivity" />
+        <activity android:name=".view.activity.AidlActivity" />
+        <activity android:name=".view.activity.MessengerActivity" />
+        <activity android:name=".view.activity.FileShareActivity" />
+        <activity android:name=".view.activity.IPCActivity" />
         <activity android:name=".view.activity.ImageLoaderActivity" />
         <activity android:name=".view.activity.WindowActivity" />
         <activity android:name=".view.activity.AnimatorActivity" />
@@ -44,6 +50,21 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
         </receiver>
+
+        <service
+                android:name=".view.activity.MessengerService"
+                android:process=":remote" />
+        <service
+                android:name=".view.activity.AidlService"
+                android:process=":aidl_remote" />
+        <service android:name=".view.activity.SocketServer"
+                android:process=":socket_remote"/>
+
+        <provider
+                android:name=".view.activity.BookProvider"
+                android:authorities="com.eastcom.harup.view.activity.BookProvider"
+                android:permission="com.eastcom.harup.PROVIDER"
+                android:process=":provider" />
     </application>
 
 </manifest>

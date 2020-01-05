@@ -2,6 +2,7 @@ package com.example.lib_imageloader
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Environment
 import android.os.Handler
 import android.os.Looper
@@ -32,13 +33,13 @@ class ImageLoader {
 
     private var mMemoryCache:LruCache<String,Bitmap>
     private var mDiskLruCache: DiskLruCache
-    private var mContext:Context
+    private var mContext:Context ?= null
     private var sThreadPoolExecutor:ThreadPoolExecutor
     private val mHandler = Handler(Looper.getMainLooper()){
         if ( (it.arg1 == MESSAGE_FLAG) and (it.what == MESSAGE_FLAG)){
             if (it.obj != null){
                 val data = it.obj as SendData
-                data.imageView.setImageBitmap(data.bitmap)
+                data.imageView.setImageBitmap(data.bitmap ?: BitmapFactory.decodeResource(mContext?.resources,android.R.drawable.stat_notify_error))
             }
         }
          true
@@ -92,11 +93,13 @@ class ImageLoader {
         var bitmap = loadFromMeCache(uri,reqWidth, reqHeight)
         if (bitmap != null){
             imageView.setImageBitmap(bitmap)
+            println("GET FROM MEMORY CACHE")
+            return
         }
         sThreadPoolExecutor.execute {
             val bitmap = loadFromDiskCache(uri, reqWidth, reqHeight)
+            println("GET FROM DISK CACHE")
             if (bitmap != null){
-                imageView.setImageBitmap(bitmap)
                 mHandler.sendMessage(SendData(bitmap,imageView).getMessage())
             }else{
                 addToDiskCache(uri)
@@ -151,7 +154,8 @@ class ImageLoader {
     }
 
     private fun getFromDiskCache(url:String,reqWidth:Int, reqHeight:Int):Bitmap?{
-        var snapshot: DiskLruCache.Snapshot = mDiskLruCache.get(hashKeyFromUrl(url))
+        val hashKeyFromUrl = hashKeyFromUrl(url)
+        var snapshot: DiskLruCache.Snapshot = mDiskLruCache[hashKeyFromUrl] ?: return null
         var fileInputStream:FileInputStream = snapshot.getInputStream(0) as FileInputStream
         var fd = fileInputStream.fd
         val bitmap:Bitmap = ImageResizer().decodeBitmapFromFileDescriptor(fd,reqWidth,reqHeight)
@@ -199,14 +203,14 @@ class ImageLoader {
     }
 
     private fun  hashKeyFromUrl(url: String):String{
-        var cacheKey = ""
-        try {
+        val cacheKey = try {
             val digest = MessageDigest.getInstance("MD5")
             digest.update(url.toByteArray())
-            var cacheKey = bytesToHexString(digest.digest())
+            bytesToHexString(digest.digest())
         }catch (e: NoSuchAlgorithmException){
-            cacheKey = url.hashCode().toString()
+            url.hashCode().toString()
         }
+        println("cachekey: $cacheKey")
         return cacheKey
     }
 
