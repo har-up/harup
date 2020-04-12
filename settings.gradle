@@ -1,1 +1,1 @@
-include ':app', ':module_login', ':lib_api', ':lib_view', ':lib_imageloader'
+include ':app', ':module_login', ':lib_api', ':lib_view', ':lib_imageloader', ':lib_common', ':lib_ffmpeg'

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:title="主页"
+        app:menu="@menu/main_menu"
+        app:collapseIcon="@drawable/ic_menu_black_24dp"
+        app:popupTheme="@style/Widget.AppCompat.Light.PopupMenu.Overflow"
+        app:titleTextColor="#000000">
+
+    <!--    <androidx.appcompat.widget.AppCompatTextView-->
+    <!--            android:id="@+id/title_toolbar"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="left"-->
+    <!--            android:bufferType="spannable"-->
+    <!--            android:foregroundTintMode="src_over"-->
+    <!--            android:freezesText="false"-->
+    <!--            android:text="主页"-->
+    <!--            android:textAlignment="center"-->
+    <!--            android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
+    <!--            android:textFontWeight="2"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:textStyle="bold|italic"-->
+    <!--            android:typeface="monospace"-->
+    <!--            app:autoSizeTextType="uniform"-->
+    <!--            app:textLocale="2" />-->
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_add_circle_outline_black_24dp" />
+
+</androidx.appcompat.widget.Toolbar>

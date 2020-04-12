@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:dist="http://schemas.android.com/apk/distribution"
+        xmlns:tools="http://schemas.android.com/tools"
         package="com.eastcom.harup">
 
     <dist:module dist:instant="true" />
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
             android:allowBackup="true"
@@ -16,7 +20,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.SocketActivity"></activity>
+        <activity android:name=".view.activity.FFmpegActivity"></activity>
+        <activity android:name=".view.activity.SoundEffectActivity" />
+        <activity android:name=".view.activity.BaseActivity" />
+        <activity android:name=".view.activity.SocketActivity" />
         <activity android:name=".view.activity.ContentProviderActivity" />
         <activity android:name=".view.activity.AidlActivity" />
         <activity android:name=".view.activity.MessengerActivity" />
@@ -31,6 +38,7 @@
         <activity android:name=".view.activity.ShapeDrawableActivity" />
         <activity android:name=".view.activity.RemoteViewActivity" />
         <activity android:name=".view.activity.HorizontalScrollViewActivity" />
+        <activity android:name="org.fmod.example.FmodActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,8 +65,9 @@
         <service
                 android:name=".view.activity.AidlService"
                 android:process=":aidl_remote" />
-        <service android:name=".view.activity.SocketServer"
-                android:process=":socket_remote"/>
+        <service
+                android:name=".view.activity.SocketServer"
+                android:process=":socket_remote" />
 
         <provider
                 android:name=".view.activity.BookProvider"

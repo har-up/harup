@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.eastcom.harup.R
 import com.eastcom.harup.view.activity.*
+import org.fmod.example.FmodActivity
 
 class HomeRecyclerViewAdapter(var datas: List<String>) : RecyclerView.Adapter<HomeItemViewHolder>() {
 
@@ -38,6 +39,9 @@ class HomeRecyclerViewAdapter(var datas: List<String>) : RecyclerView.Adapter<Ho
                 "Window" -> intent = Intent(holder.itemView.context,WindowActivity::class.java)
                 "ImageLoader" -> intent = Intent(holder.itemView.context,ImageLoaderActivity::class.java)
                 "IPC" -> intent = Intent(holder.itemView.context,IPCActivity::class.java)
+                "Fmod" -> intent = Intent(holder.itemView.context, FmodActivity::class.java)
+                "Sound Change" -> intent = Intent(holder.itemView.context, SoundEffectActivity::class.java)
+                "FFmpeg" -> intent = Intent(holder.itemView.context, FFmpegActivity::class.java)
             }
             if(intent != null) holder.itemView.context.startActivity(intent)
         }

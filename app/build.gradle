@@ -17,29 +17,62 @@ android {
 //        resConfigs android.buildToolsVersion: aapt error: invalid config **** 的罪魁祸首
     }
     buildTypes {
+        debug {
+            buildConfigField("String[]", "FMOD_LIBS", "{ \"fmod\" , \"fmodL\"}")
+            externalNativeBuild {
+                ndkBuild {
+                    arguments 'FMOD_CONFIG=ReleaseWithLogging', 'FMOD_LIB_SUFFIX=L'
+                }
+            }
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+
+            buildConfigField("String[]", "FMOD_LIBS", "{ \"fmod\" , \"fmodL\"}")
+            externalNativeBuild {
+                ndkBuild {
+                    arguments 'FMOD_CONFIG=Release', 'FMOD_LIB_SUFFIX='
+                }
+            }
         }
     }
+
+    externalNativeBuild {
+        ndkBuild {
+            path "Android.mk"
+        }
+    }
+
+    def media_root = '../../../..'
+    sourceSets {
+        main {
+            assets.srcDirs = ['assets/media']
+        }
+    }
+
     buildToolsVersion = buildtool
 
 
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "com.android.support:recyclerview-v7:${versions["support-version"]}"
     implementation project(path: ':lib_view')
-    implementation project(path: ':lib_imageloader')
     implementation 'androidx.cardview:cardview:1.0.0'
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-
+    implementation project(path: ':lib_common')
+    implementation 'androidx.mediarouter:mediarouter:1.1.0'
+    implementation project(path: ':lib_imageloader')
+    implementation files('libs/fmod.jar')
+    implementation project(path: ':lib_ffmpeg')
 }

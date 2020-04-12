@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.4.1)
+# 添加include目录，在C/C++中的include指令能找到对应的头文件
+include_directories(${CMAKE_SOURCE_DIR}/jni)
+
+#给项目命名
+PROJECT(lib_ffmpeg)
+
+#添加共享库搜索路径
+link_directories(${CMAKE_SOURCE_DIR}/jni)
+
+#指定生成库文件的目录
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/jni
+
+target_link_libraries(avcodec avdevice avfilter avformat avutil postproc swresample swscale)
+
+set(SRC_LIST ${CMAKE_SOURCE_DIR}/jni/dn_ffmpeg_player.c)
