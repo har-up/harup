@@ -29,7 +29,7 @@ class MainActivity : BaseActivity() {
     private fun init(){
         var data = arrayOf("HorizontalScrollView","RemoteView","ShapeDrawable","OtherDrawable"
             ,"Animation","Animation Activity","Animator","Window","ImageLoader",
-            "IPC","Fmod","Sound Change","FFmpeg").toList()
+            "IPC","Fmod","Sound Change","FFmpeg","Posix").toList()
         recyclerView.layoutManager = GridLayoutManager(this,2)
         recyclerView.adapter = HomeRecyclerViewAdapter(data)
     }

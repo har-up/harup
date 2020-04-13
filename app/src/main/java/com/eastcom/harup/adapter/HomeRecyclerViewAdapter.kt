@@ -42,6 +42,7 @@ class HomeRecyclerViewAdapter(var datas: List<String>) : RecyclerView.Adapter<Ho
                 "Fmod" -> intent = Intent(holder.itemView.context, FmodActivity::class.java)
                 "Sound Change" -> intent = Intent(holder.itemView.context, SoundEffectActivity::class.java)
                 "FFmpeg" -> intent = Intent(holder.itemView.context, FFmpegActivity::class.java)
+                "Posix" -> intent = Intent(holder.itemView.context, PosixActivity::class.java)
             }
             if(intent != null) holder.itemView.context.startActivity(intent)
         }

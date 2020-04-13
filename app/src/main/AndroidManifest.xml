@@ -20,7 +20,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.FFmpegActivity"></activity>
+        <activity android:name=".view.activity.PosixActivity"></activity>
+        <activity android:name=".view.activity.FFmpegActivity" />
         <activity android:name=".view.activity.SoundEffectActivity" />
         <activity android:name=".view.activity.BaseActivity" />
         <activity android:name=".view.activity.SocketActivity" />

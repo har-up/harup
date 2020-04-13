@@ -26,13 +26,11 @@ android {
     }
 
 
-    externalNativeBuild {
-        ndkBuild {
-            path "CMakeList.txt"
-        }
-
-
-    }
+//    externalNativeBuild {
+//        ndkBuild {
+//            path "CMakeList.txt"
+//        }
+//    }
     sourceSets {
         main {
             jni.srcDirs = ['jni']

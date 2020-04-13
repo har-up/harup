@@ -34,3 +34,12 @@ LOCAL_SHARED_LIBRARIES  := fmod fmodL
 
 include $(BUILD_SHARED_LIBRARY)
 
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE            := posix
+LOCAL_SRC_FILES         := src/main/cpp/posix.c
+LOCAL_C_INCLUDES        := src/main/cpp
+LOCAL_LDLIBS +=-L$(SYSROOT)/usr/lib -lm -llog
+
+include $(BUILD_SHARED_LIBRARY)
