@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+  <component name="Encoding">
+    <file url="file://E:/BaiduNetdiskDownload/ndk/10_28_ffmpeg_AVPacket生产问题/10_28_ffmpeg/code/c代码.c" charset="GBK" />
+  </component>
 </project>

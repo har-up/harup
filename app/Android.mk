@@ -7,7 +7,7 @@ FMOD_API_ROOT := $(LOCAL_PATH)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE            := fmodL
-LOCAL_SRC_FILES         := ${FMOD_API_ROOT}/jniLibs/$(TARGET_ARCH_ABI)/libfmod$(FMOD_LIB_SUFFIX).so
+LOCAL_SRC_FILES         := jniLibs/$(TARGET_ARCH_ABI)/libfmod$(FMOD_LIB_SUFFIX).so
 LOCAL_EXPORT_C_INCLUDES := src/main/cpp/inc
 
 include $(PREBUILT_SHARED_LIBRARY)
@@ -16,7 +16,7 @@ include $(PREBUILT_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE            := fmod
-LOCAL_SRC_FILES         := ${FMOD_API_ROOT}/jniLibs/$(TARGET_ARCH_ABI)/libfmod.so
+LOCAL_SRC_FILES         := jniLibs/$(TARGET_ARCH_ABI)/libfmod.so
 LOCAL_EXPORT_C_INCLUDES := src/main/cpp/inc
 
 
@@ -43,3 +43,4 @@ LOCAL_C_INCLUDES        := src/main/cpp
 LOCAL_LDLIBS +=-L$(SYSROOT)/usr/lib -lm -llog
 
 include $(BUILD_SHARED_LIBRARY)
+

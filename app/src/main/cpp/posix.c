@@ -6,6 +6,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <android/log.h>
+#include <stdio.h>
 
 #define LOGI(FORMAT,...) __android_log_print(ANDROID_LOG_INFO,"har-up",FORMAT,##__VA_ARGS__)
 
@@ -13,6 +14,11 @@ JavaVM* javaVm;
 jclass golbal_clss;
 jmethodID method_id1;
 jmethodID method_id2;
+
+struct Node{
+    void* data;
+};
+
 
 void* callback(void* arg){
     LOGI("THIS IS OTHER THREAD %s",arg);

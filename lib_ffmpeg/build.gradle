@@ -11,10 +11,9 @@ android {
         versionCode rootProject.ext.android.versionCoe
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        externalNativeBuild{
-            cmake{
-                abiFilters "armeabi","armeabi-v7a"
-            }
+
+        ndk{
+            abiFilters "armeabi-v7a"
         }
     }
 
@@ -26,11 +25,14 @@ android {
     }
 
 
-//    externalNativeBuild {
-//        ndkBuild {
-//            path "CMakeList.txt"
-//        }
-//    }
+    externalNativeBuild {
+        ndkBuild {
+            path "jni/Android.mk"
+        }
+    }
+
+
+
     sourceSets {
         main {
             jni.srcDirs = ['jni']

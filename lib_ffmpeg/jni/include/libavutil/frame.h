@@ -619,7 +619,7 @@ const char *av_get_colorspace_name(enum AVColorSpace val);
  * must be allocated through other means, e.g. with av_frame_get_buffer() or
  * manually.
  */
-AVFrame *av_frame_alloc(void);
+AVFrame *dav_frame_alloc(void);
 
 /**
  * Free the frame and any dynamically allocated objects in it,

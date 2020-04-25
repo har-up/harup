@@ -1,9 +1,13 @@
 package com.example.ffmpeg;
 
+import android.view.Surface;
+
 public class FFmpegUtil {
 
     public native static void test(String inputStr, String outStr);
 
+
+    public native static void play(String inputPath, Surface surface);
 
     static {
         System.loadLibrary("avutil-54");
