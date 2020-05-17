@@ -20,6 +20,7 @@ class MainActivity : BaseActivity() {
         toolbar.setOnMenuItemClickListener{
             when(it.itemId){
             }
+            true
         }
         setSupportActionBar(Toolbar(this))
 //        setSupportActionBar(toolbar)
@@ -37,3 +38,4 @@ class MainActivity : BaseActivity() {
 
 
 }
+

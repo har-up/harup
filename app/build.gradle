@@ -15,6 +15,11 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        resConfigs android.buildToolsVersion: aapt error: invalid config **** 的罪魁祸首
+
+
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
     buildTypes {
         debug {

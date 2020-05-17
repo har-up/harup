@@ -22,3 +22,4 @@ class ExampleInstrumentedTest {
         assertEquals("com.eastcom.harup", appContext.packageName)
     }
 }
+
