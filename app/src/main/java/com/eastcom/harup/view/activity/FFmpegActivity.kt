@@ -3,6 +3,7 @@ package com.eastcom.harup.view.activity
 import android.app.IntentService
 import android.app.Service
 import android.content.Intent
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -22,6 +23,7 @@ class FFmpegActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ffmpeg)
         FileUtil.verifyStoragePermissions(this)
+        var map:HashMap<Char,Integer> = HashMap();
         initView()
     }
 
@@ -50,7 +52,16 @@ class MyService : IntentService("service"){
         if (!output.exists()){
            output.createNewFile();
         }
-        FFmpegUtil.test(input.absolutePath, output.absolutePath)
+        MyAsyncTask().execute()
+        FFmpegUtil.test(input.path, output.absolutePath)
+    }
+
+    class MyAsyncTask : AsyncTask<Void,Void,Void>(){
+        override fun doInBackground(vararg params: Void?): Void {
+            TODO("Not yet implemented")
+        }
     }
 }
+
+
 

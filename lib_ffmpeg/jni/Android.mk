@@ -49,7 +49,7 @@ include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE            := player
-LOCAL_SRC_FILES         := dn_ffmpeg_player.c
+LOCAL_SRC_FILES         := dn_ffmpeg_player.c test.cpp
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/libyuv
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/libavfrmat
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/libavcodec
@@ -60,8 +60,8 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/libavfutil
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/libpostproc
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/libswresample
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/libswscale
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
-##LOCAL_LDLIBS +=-L$(SYSROOT)/usr/lib -lm -llog
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/include F:/android-ndk-r17b/sources/cxx-stl/llvm-libc++/include
+LOCAL_LDLIBS +=-L$(SYSROOT)/usr/lib -lm -llog
 ##-landroid参数 for native windows
 LOCAL_LDLIBS += -llog -landroid
 LOCAL_SHARED_LIBRARIES := avcodec avdevice avfilter avformat avutil postproc swresample swscale yuv

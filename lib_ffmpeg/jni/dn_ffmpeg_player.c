@@ -7,6 +7,9 @@
 #include <libavutil/frame.h>
 #include <libavformat/avio.h>
 #include <libavutil/file.h>
+#include <libavutil/imgutils.h>
+#include <libavutil/samplefmt.h>
+#include <libavutil/timestamp.h>
 #include <libavcodec/dv_profile.h>
 //编码
 #include "libavcodec/avcodec.h"
@@ -14,7 +17,6 @@
 #include "libavformat/avformat.h"
 //像素处理
 #include "libswscale/swscale.h"
-
 #include <android/native_window_jni.h>
 #include <android/native_window.h>
 #include <libyuv/libyuv/convert_argb.h>
@@ -61,16 +63,25 @@ static void pgm_save(unsigned char *buf, int wrap, int xsize, int ysize,
     fclose(f);
 }
 
+void* printLog(void* s,int code ,char* str){
+    LOGE("ERROR:")
+    LOGE("%s",str);
+}
+
 static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt,
                    const char *filename)
 {
+//    av_log_set_callback(printLog);
+    LOGI("decode")
     char buf[1024];
     int ret;
+    if (pkt->stream_index != 0) return;
     ret = avcodec_send_packet(dec_ctx, pkt);
     if (ret < 0) {
-        LOGE("Error sending a packet for decoding\n");
+        LOGE("Error sending a packet for decoding %d\n",ret);
         exit(1);
     }
+    LOGI("send a packet success");
     while (ret >= 0) {
         ret = avcodec_receive_frame(dec_ctx, frame);
         if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
@@ -90,143 +101,50 @@ static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt,
 }
 
 
-
+#define INBUF_SIZE 4096
 JNIEXPORT void JNICALL Java_com_example_ffmpeg_FFmpegUtil_test(JNIEnv * env, jclass cls, jstring path, jstring out){
     const char* filePath = (*env)->GetStringUTFChars(env,path,NULL);
     const char* outputPath = (*env)->GetStringUTFChars(env,out,NULL);
     LOGI("%s",filePath)
 
+    const char *filename, *outfilename;
+    const AVCodec *codec;
+    AVCodecParserContext *parser;
     AVFormatContext* avFormatContext = NULL;
-    AVCodecContext* codecContext = NULL;
-    AVCodec* avCodec = NULL;
-    AVCodecParserContext *parser = NULL;
-    AVInputFormat* avInputFormat;
-    AVDictionary* avDictionary;
-    int ret = 0;
-
-    AVIOContext* avioContext= NULL;
-    uint8_t *buffer, *avioContextBuffer = NULL;
-    size_t bufferSize, avioContextBufferSize = 4096;
-    struct buffer_data bufferData = {0};
-
-    AVPacket* avPacket;
-    AVFrame* avFrame;
+    AVCodecContext *c= NULL;
+    FILE *f;
+    AVFrame *frame;
+    uint8_t inbuf[INBUF_SIZE + AV_INPUT_BUFFER_PADDING_SIZE];
+    uint8_t *data;
+    size_t   data_size;
+    int ret;
+    AVPacket *pkt;
 
 
-    //根据给的文件路径获取文件指针buffer,和读取总的大小bufferSize
-    ret = av_file_map(filePath,&buffer,&bufferSize,0,NULL);
-    if (ret < 0){
-        LOGE("file prepare file error")
-    }
-    bufferData.ptr = buffer;
-    bufferData.size = bufferSize;
-    LOGI("bufferDataSize:%d",bufferData.size)
-
-    //初始化avFormatContext
     avFormatContext = avformat_alloc_context();
-    if(!avFormatContext){
-        LOGE("Could not allocate context")
-    }
-    LOGI("allocate context success")
-
-
-    //初始化avio_alloc_context所需的参数buffer,必须使用av_malloc分配
-    avioContextBuffer = av_malloc(avioContextBufferSize);
-    if (!avioContextBuffer){
-        LOGE("Alloc avioBuffer error")
+    if (!avFormatContext) {
+        LOGE("avformat_alloc_context  error");
+        goto end;
     }
 
-    //将文件数据读入缓冲区
-    avioContext = avio_alloc_context(avioContextBuffer,avioContextBufferSize,0,&bufferData,read_packet,NULL,NULL);
-    if (!avioContext){
-        LOGE("Could not alloc avioContext")
-    }
+    ret = avformat_open_input(&avFormatContext,filePath,NULL,NULL);
 
-    avFormatContext->pb = avioContext;
-    ret = avformat_open_input(&avFormatContext,NULL,NULL,NULL);
     if(ret < 0){
-        LOGE("Could not open file")
-    }
-    LOGI("open input file success")
-
-    //通过avFormatContext的pb获取流信息，初始化avFormatContext
-    ret = avformat_find_stream_info(avFormatContext,NULL);
-    if (ret < 0){
-        LOGE("Could not find stream info")
-    }
-
-    LOGI("input file has stream info")
-    av_dump_format(avFormatContext,0,outputPath,0);
-
-    //通过codec id获取解码器
-
-    LOGI("stream number:%D",avFormatContext->nb_streams)
-    int videoIndex = -1;
-    for (int i = 0; i < avFormatContext->nb_streams ; ++i) {
-        if (avFormatContext->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO){
-            videoIndex = i;
-        }
-    }
-    LOGI("videoIndex:%d",videoIndex);
-    avCodec = avcodec_find_decoder(avFormatContext->streams[videoIndex]->codecpar->codec_id);
-    if (!avCodec){
-        LOGE("找不到解码器 id: %d",avFormatContext->streams[videoIndex]->codecpar->codec_id);
-    }
-
-    parser = av_parser_init(avCodec->id);
-    if (!parser){
-        LOGE("找不到解析器");
+        LOGE("avformat_open_input  error : %d",ret);
         goto end;
+    }else{
+        LOGI("avformat_open_input  success : %d",ret);
     }
 
-    codecContext = avcodec_alloc_context3(avCodec);
-    if (!codecContext){
-        LOGE("初始化解码器上下文失败");
-        goto end;
-    }
+    avformat_find_stream_info(avFormatContext,NULL);
 
-    //打开解码器
-    ret = avcodec_open2(codecContext,avCodec,NULL);
-    if (ret < 0){
-        LOGE("打开解码器失败")
-        goto end;
-    }
-
-    parser = avFormatContext->streams[1]->parser;
-    int size = bufferData.size;
-    while(size > 0){
-        ret = av_parser_parse2(parser,codecContext,&avPacket->data,&avPacket->size,bufferData.ptr,bufferData.size,AV_NOPTS_VALUE,AV_NOPTS_VALUE,0);
-        if (ret < 0){
-            LOGE("解码器解析数据时出错");
-            goto end;
-        }
-        size -= ret;
-        if (avPacket->size){
-            decode(codecContext,avFrame,avPacket,outputPath);
-        }
-    }
-
-    /* flush the decoder */
-    decode(codecContext, avFrame, NULL, outputPath);
-
-
+    LOGI("CODEC ID: %d",avFormatContext->video_codec_id);
 
 end:
     (*env)->ReleaseStringUTFChars(env,path,filePath);
     (*env)->ReleaseStringUTFChars(env,out,outputPath);
-    av_parser_close(parser);
-    avcodec_free_context(&codecContext);
-    av_frame_free(&avFrame);
-    av_packet_free(&avPacket);
-    avformat_close_input(&avFormatContext);
-    /* note: the internal buffer could have changed, and be != avio_ctx_buffer */
-    if (avioContext)
-        av_freep(&avioContext->buffer);
-    avio_context_free(&avioContext);
-    av_file_unmap(buffer, bufferSize);
-    if (ret < 0) {
-        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
-    }
+    avformat_close_input(avFormatContext);
+    avformat_free_context(avFormatContext);
 }
 
 

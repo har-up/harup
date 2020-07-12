@@ -282,7 +282,7 @@ public class FileUtil {
             if(currentFiles[i].isDirectory()){  //如果当前目录为子目录
                 copyDir(currentFiles[i].getPath() + "/" , currentFiles[i].getName()+"/");  /**进行当前函数递归操作**/
             }else{                              //当前为文件，则进行文件拷贝
-                copyFile(currentFiles[i].getPath() , toFolder + currentFiles[i].getName());
+                copyFile(currentFiles[i].getPath() , toFolder + File.separator +  currentFiles[i].getName());
             }
         }
         return 0;

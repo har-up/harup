@@ -33,6 +33,7 @@ int FMOD_Main()
 
     if (version < FMOD_VERSION)
     {
+
         Common_Fatal("FMOD lib version %08x doesn't match header version %08x", version, FMOD_VERSION);
     }
 

@@ -47,8 +47,15 @@ class CircleView : View{
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+        requestLayout()
+        invalidate()
         var width = width - paddingLeft - paddingRight
         var height = height - paddingTop - paddingBottom
+        var list = with(ArrayList<String>()){
+                add("none")
+                print("$size")
+        }
+
         canvas?.drawCircle(((width + 2*paddingLeft)/2).toFloat(), ((height + 2*paddingTop)/2).toFloat(),
             (Math.min(width,height)/2).toFloat(),mPaint)
     }

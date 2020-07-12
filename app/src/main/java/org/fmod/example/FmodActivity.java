@@ -1,5 +1,8 @@
 package org.fmod.example;
 
+import android.database.ContentObservable;
+import android.database.DataSetObservable;
+import android.database.Observable;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,6 +16,9 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.pm.PackageManager;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.eastcom.harup.BuildConfig;
 
@@ -41,7 +47,7 @@ public class FmodActivity extends Activity implements OnTouchListener, Runnable
         	buttons[i].setId(i);
         }
 
-        // Create the button row layouts
+		// Create the button row layouts
         LinearLayout llTopRowButtons = new LinearLayout(this);
         llTopRowButtons.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout llMiddleRowButtons = new LinearLayout(this);
@@ -77,7 +83,6 @@ public class FmodActivity extends Activity implements OnTouchListener, Runnable
 
         mThread = new Thread(this, "Example Main");
         mThread.start();
-
         setStateCreate();
     }
 

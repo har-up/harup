@@ -43,6 +43,9 @@ class HomeRecyclerViewAdapter(var datas: List<String>) : RecyclerView.Adapter<Ho
                 "Sound Change" -> intent = Intent(holder.itemView.context, SoundEffectActivity::class.java)
                 "FFmpeg" -> intent = Intent(holder.itemView.context, FFmpegActivity::class.java)
                 "Posix" -> intent = Intent(holder.itemView.context, PosixActivity::class.java)
+                "Bitmap" -> intent = Intent(holder.itemView.context, BitmapActivity::class.java)
+                "HotFix" -> intent = Intent(holder.itemView.context, HotFixActivity::class.java)
+                "ChangeTheme" -> intent = Intent(holder.itemView.context, ChangeThemeActivity::class.java)
             }
             if(intent != null) holder.itemView.context.startActivity(intent)
         }
